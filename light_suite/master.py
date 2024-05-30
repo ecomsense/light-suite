@@ -23,7 +23,7 @@ def _filter_masters() -> None:
         "SEM_INSTRUMENT_NAME",
     ]
     df = df[columns]
-    exchanges = ["NSE", "BSE"]
+    exchanges = ["NSE_EQ", "BSE"]
     for exchange in exchanges:
         df_temp = df[df["SEM_EXM_EXCH_ID"] == exchange]
         print(df_temp.tail())
@@ -33,8 +33,7 @@ def _filter_masters() -> None:
 def download_masters() -> None:
     if FUTL.is_file_not_2day(DUMP):
         print(f"Downloading {DUMP}..")
-        r = requests.get(
-            "https://images.dhan.co/api-data/api-scrip-master.csv")
+        r = requests.get("https://images.dhan.co/api-data/api-scrip-master.csv")
         FUTL.write_file(DUMP, r.text)
         _filter_masters()
 
