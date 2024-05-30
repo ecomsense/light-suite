@@ -74,7 +74,9 @@ def main():
                 result_type="expand",
             )
         )
+        df[["cpr", "bc", "tc"]] = df[["cpr", "bc", "tc"]].shift(1)
         print(df)
+        df.to_csv("tcs_data.csv", index=None)
 
     except Exception as e:
         print(e)
